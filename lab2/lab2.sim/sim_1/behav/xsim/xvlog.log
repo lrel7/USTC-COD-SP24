@@ -1,4 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab2/lab2.srcs/sources_1/new/alu.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module ALU
-INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab2/lab2.srcs/sim_1/new/alu_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module ALU_tb

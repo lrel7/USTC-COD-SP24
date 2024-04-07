@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1711335118" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/TOP.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="TOP_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="TOP.dcp"/>
   <File Type="RDS-UTIL-PB" Name="TOP_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="TOP_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="TOP_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="TOP.vds"/>
-  <File Type="REPORTS-TCL" Name="TOP_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="TOP_timing_summary_synth.pb"/>
   <File Type="PA-TCL" Name="TOP.tcl"/>
+  <File Type="RDS-UTIL" Name="TOP_utilization_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="TOP_reports.tcl"/>
+  <File Type="RDS-RDS" Name="TOP.vds"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/alu.v">
