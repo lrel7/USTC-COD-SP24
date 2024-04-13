@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:04:56 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Sun Apr 14 00:20:08 2024
+# Process ID: 243119
+# Current directory: /home/ubuntu/cod_labs/lab4/lab4.runs/impl_1
+# Command line: vivado -log TOP.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source TOP.tcl -notrace
+# Log file: /home/ubuntu/cod_labs/lab4/lab4.runs/impl_1/TOP.vdi
+# Journal file: /home/ubuntu/cod_labs/lab4/lab4.runs/impl_1/vivado.jou
+# Running On: VM7699-verilog-labs, OS: Linux, CPU Frequency: 2483.274 MHz, CPU Physical cores: 2, Host memory: 6442 MB
+#-----------------------------------------------------------
+source TOP.tcl -notrace

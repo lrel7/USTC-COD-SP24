@@ -1,0 +1,29 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.gen/sources_1/ip/DATA_MEM/sim/DATA_MEM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DATA_MEM
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.gen/sources_1/ip/INST_MEM/sim/INST_MEM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module INST_MEM
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/alu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/branch.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module BRANCH
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/cpu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CPU
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/decoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DECODER
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/mux21.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MUX21
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/mux41.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MUX41
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/pc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PC
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/pc_add4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PC_ADD4
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/pc_and.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PC_AND
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/regfile.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module REG_FILE
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sources_1/new/vsrc/CPU/sl_unit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SL_UNIT
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab4/lab4.srcs/sim_1/new/cpu_tb.v" into library xil_defaultlib
+WARNING: [VRFC 10-9157] macro 'HALT' is redefined [/home/ubuntu/cod_labs/lab4/lab4.srcs/sim_1/new/cpu_tb.v:3]
+INFO: [VRFC 10-311] analyzing module CPU_tb
