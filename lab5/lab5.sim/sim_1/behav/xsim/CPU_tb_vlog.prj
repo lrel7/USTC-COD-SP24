@@ -1,0 +1,23 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../lab5.gen/sources_1/ip/DATA_MEM/sim/DATA_MEM.v" \
+"../../../../lab5.gen/sources_1/ip/INST_MEM/sim/INST_MEM.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/alu.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/branch.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/cpu.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/decoder.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/mux21.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/mux41.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/pc.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/pc_add4.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/pc_and.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/regfile.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/seg_reg.v" \
+"../../../../lab5.srcs/sources_1/new/vsrc/CPU/sl_unit.v" \
+"../../../../lab5.srcs/sim_1/new/cpu_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

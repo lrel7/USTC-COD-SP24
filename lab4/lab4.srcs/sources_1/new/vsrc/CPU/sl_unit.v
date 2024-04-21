@@ -16,6 +16,8 @@ integer mask;
 always @(*) begin
     // aligned_addr = addr & (~3);
     index = addr & 3;
+    rd_out = 0;
+    wd_out = 0;
     case (dmem_access)
         `LB: begin
             case (index)
@@ -24,7 +26,6 @@ always @(*) begin
                 2: rd_out = {{24{rd_in[23]}}, rd_in[23:16]};
                 3: rd_out = {{24{rd_in[31]}}, rd_in[31:24]};
             endcase
-            wd_out = 0;
         end
         `LBU: begin
             case (index)
@@ -33,7 +34,6 @@ always @(*) begin
                 2: rd_out = {24'b0, rd_in[23:16]};
                 3: rd_out = {24'b0, rd_in[31:24]};
             endcase
-            wd_out = 0;
         end
         `LH: begin
             case (index)
@@ -42,7 +42,6 @@ always @(*) begin
                 2: rd_out = {{16{rd_in[31]}}, rd_in[31:16]};
                 // (TO DO) 3: rd_out = {{24{rd_out[31]}}, rd_out[31:24]};
             endcase
-            wd_out = 0;
         end
         `LHU: begin
             case (index)
@@ -51,14 +50,11 @@ always @(*) begin
                 2: rd_out = {16'b0, rd_in[31:16]};
                 // (TO DO) 3: rd_out = {{24{rd_out[31]}}, rd_out[31:24]};
             endcase
-            wd_out = 0;
         end
         `LW: begin
             rd_out = rd_in;
-            wd_out = 0;
         end
         `SB: begin
-            rd_out = 0;
             case (index)
                 0: wd_out = {rd_in[31:8], wd_in[7:0]};
                 1: wd_out = {rd_in[31:16], wd_in[7:0], rd_in[7:0]};
@@ -66,8 +62,7 @@ always @(*) begin
                 3: wd_out = {wd_in[7:0], rd_in[23:0]};
             endcase
         end
-        `SH: begin
-            rd_out = 0;        
+        `SH: begin       
             case (index)
                 0: wd_out = {rd_in[31:16], wd_in[15:0]};
                 1: wd_out = {rd_in[31:24], wd_in[15:0], rd_in[7:0]};
@@ -76,7 +71,6 @@ always @(*) begin
             endcase
         end
         `SW: begin
-            rd_out = 0;
             wd_out = wd_in;
         end
     endcase

@@ -1,31 +1,9 @@
 Vivado Simulator v2023.1
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
-Running: /opt/vlab/vivado/Xilinx/Vivado/2023.1/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L dist_mem_gen_v8_0_13 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot CPU_tb_behav xil_defaultlib.CPU_tb xil_defaultlib.glbl -log elaborate.log 
+Running: /opt/vlab/vivado/Xilinx/Vivado/2023.1/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot SL_UNIT_tb_behav xil_defaultlib.SL_UNIT_tb xil_defaultlib.glbl -log elaborate.log 
 Using 8 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'we' [/home/ubuntu/cod_labs/lab4/lab4.srcs/sim_1/new/cpu_tb.v:32]
-WARNING: [VRFC 10-5021] port 'debug_reg_ra' is not connected on this instance [/home/ubuntu/cod_labs/lab4/lab4.srcs/sim_1/new/cpu_tb.v:16]
 Completed static elaboration
-Starting simulation data flow analysis
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.PC_ADD4
-Compiling module xil_defaultlib.PC_AND
-Compiling module xil_defaultlib.MUX41
-Compiling module xil_defaultlib.PC
-Compiling module xil_defaultlib.DECODER
-Compiling module xil_defaultlib.REG_FILE
-Compiling module xil_defaultlib.BRANCH
-Compiling module xil_defaultlib.MUX21
-Compiling module xil_defaultlib.ALU
-Compiling module xil_defaultlib.SL_UNIT
-Compiling module xil_defaultlib.CPU
-Compiling module dist_mem_gen_v8_0_13.dist_mem_gen_v8_0_13(C_FAMILY="a...
-Compiling module xil_defaultlib.INST_MEM
-Compiling module dist_mem_gen_v8_0_13.dist_mem_gen_v8_0_13(C_FAMILY="a...
-Compiling module xil_defaultlib.DATA_MEM
-Compiling module xil_defaultlib.CPU_tb
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot CPU_tb_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

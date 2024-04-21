@@ -1,0 +1,51 @@
+Vivado Simulator v2023.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /opt/vlab/vivado/Xilinx/Vivado/2023.1/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L dist_mem_gen_v8_0_13 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot CPU_tb_behav xil_defaultlib.CPU_tb xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 5 for port 'debug_reg_ra' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sim_1/new/cpu_tb.v:26]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 5 for port 'alu_op_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:212]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 5 for port 'rf_wa_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:213]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 4 for port 'br_type_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:214]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 4 for port 'dmem_access_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:215]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 2 for port 'rf_wd_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:216]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'alu_src0_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:217]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'alu_src1_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:218]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'rf_we_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:219]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'dmem_we_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:220]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'we' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sim_1/new/cpu_tb.v:33]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 5 for port 'alu_op_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:292]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 4 for port 'br_type_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:293]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'alu_src0_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:294]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'alu_src1_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:295]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 5 for port 'alu_op_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:323]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 4 for port 'br_type_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:324]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 4 for port 'dmem_access_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:325]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'alu_src0_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:326]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'alu_src1_sel_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:327]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'dmem_we_in' [/home/ubuntu/cod_labs/lab5/lab5.srcs/sources_1/new/vsrc/CPU/cpu.v:328]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.PC_ADD4
+Compiling module xil_defaultlib.PC_AND
+Compiling module xil_defaultlib.MUX41
+Compiling module xil_defaultlib.PC
+Compiling module xil_defaultlib.DECODER
+Compiling module xil_defaultlib.REG_FILE
+Compiling module xil_defaultlib.BRANCH
+Compiling module xil_defaultlib.MUX21
+Compiling module xil_defaultlib.ALU
+Compiling module xil_defaultlib.SL_UNIT
+Compiling module xil_defaultlib.SEG_REG
+Compiling module xil_defaultlib.CPU
+Compiling module dist_mem_gen_v8_0_13.dist_mem_gen_v8_0_13(C_FAMILY="a...
+Compiling module xil_defaultlib.INST_MEM
+Compiling module dist_mem_gen_v8_0_13.dist_mem_gen_v8_0_13(C_FAMILY="a...
+Compiling module xil_defaultlib.DATA_MEM
+Compiling module xil_defaultlib.CPU_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot CPU_tb_behav

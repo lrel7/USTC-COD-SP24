@@ -1,0 +1,367 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.1 (lin64) Build 3865809 Sun May  7 15:04:56 MDT 2023
+| Date         : Mon Apr 15 18:36:44 2024
+| Host         : VM7699-verilog-labs running 64-bit Ubuntu 22.04.3 LTS
+| Command      : report_methodology -file TOP_methodology_drc_routed.rpt -pb TOP_methodology_drc_routed.pb -rpx TOP_methodology_drc_routed.rpx
+| Design       : TOP
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Fully Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 66
++-----------+------------------+-------------------------------------------------+------------+
+| Rule      | Severity         | Description                                     | Violations |
++-----------+------------------+-------------------------------------------------+------------+
+| TIMING-1  | Critical Warning | Invalid clock waveform on Clock Modifying Block | 1          |
+| TIMING-20 | Warning          | Non-clocked latch                               | 64         |
+| LATCH-1   | Advisory         | Existing latches in the design                  | 1          |
++-----------+------------------+-------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-1#1 Critical Warning
+Invalid clock waveform on Clock Modifying Block  
+Invalid clock waveform for clock clk_50 specified at a PLLE2_ADV output PLLE2_BASE_inst/CLKOUT0 that does not match the CMB settings. The waveform of the clock is 20 {0 10}. The expected waveform is 40 {0 20}
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[0] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[10] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[10]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[11] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[11]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#4 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[12] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[12]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#5 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[13] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[13]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#6 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[14] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[14]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#7 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[15] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[15]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#8 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[16] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[16]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#9 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[17] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[17]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#10 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[18] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[18]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#11 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[19] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[19]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#12 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[1] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#13 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[20] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[20]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#14 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[21] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[21]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#15 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[22] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[22]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#16 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[23] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[23]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#17 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[24] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[24]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#18 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[25] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[25]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#19 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[26] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[26]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#20 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[27] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[27]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#21 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[28] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[28]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#22 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[29] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[29]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#23 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[2] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#24 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[30] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[30]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#25 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[31] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[31]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#26 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[3] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#27 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[4] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[4]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#28 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[5] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#29 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[6] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[6]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#30 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[7] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#31 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[8] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[8]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#32 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/rd_out_reg[9] cannot be properly analyzed as its control pin cpu/sl_unit/rd_out_reg[9]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#33 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[0] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#34 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[10] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[10]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#35 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[11] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[11]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#36 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[12] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[12]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#37 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[13] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[13]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#38 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[14] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[14]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#39 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[15] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[15]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#40 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[16] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[16]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#41 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[17] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[17]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#42 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[18] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[18]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#43 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[19] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[19]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#44 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[1] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#45 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[20] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[20]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#46 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[21] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[21]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#47 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[22] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[22]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#48 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[23] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[23]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#49 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[24] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[24]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#50 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[25] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[25]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#51 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[26] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[26]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#52 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[27] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[27]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#53 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[28] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[28]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#54 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[29] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[29]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#55 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[2] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#56 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[30] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[30]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#57 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[31] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[31]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#58 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[3] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#59 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[4] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[4]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#60 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[5] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#61 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[6] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[6]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#62 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[7] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#63 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[8] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[8]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#64 Warning
+Non-clocked latch  
+The latch cpu/sl_unit/wd_out_reg[9] cannot be properly analyzed as its control pin cpu/sl_unit/wd_out_reg[9]/G is not reached by a timing clock
+Related violations: <none>
+
+LATCH-1#1 Advisory
+Existing latches in the design  
+There are 64 latches found in the design. Inferred latches are often the result of HDL coding mistakes, such as incomplete if or case statements.
+Related violations: <none>
+
+
