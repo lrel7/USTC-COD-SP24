@@ -1,0 +1,12 @@
+0.7
+2020.2
+May  7 2023
+15:10:42
+/home/ubuntu/cod_labs/lab7/lab7.sim/sim_1/behav/xsim/glbl.v,1683266558,verilog,,,,glbl,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_lru.v,1715535027,verilog,,/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/bram.v,,TwoWayCacheLRU,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/bram.v,1715127890,verilog,,/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/mem.v,,bram,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/cache_tb.v,1715480677,verilog,,,,cache_tb,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/mem.v,1715127891,verilog,,/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/mem_bram.v,,mem,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/mem_bram.v,1715520609,verilog,,/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/cache_tb.v,,mem_bram,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/my_cache.v,1715480341,verilog,,/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/cache_tb.v,,MyCache,,,,,,,,
+/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/simple_cache.v,1715390477,verilog,,/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/cache_tb.v,,cache,,,,,,,,

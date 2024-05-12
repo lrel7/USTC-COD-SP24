@@ -1,0 +1,425 @@
+   // Tag Brams
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram0(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[0]),
+        .dout({r_valids[0], r_dirtys[0], r_tags[0]})
+    );
+
+    bram #(
+    .ADDR_WIDTH(INDEX_WIDTH),
+    .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram1(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[1]),
+        .dout({r_valids[1], r_dirtys[1], r_tags[1]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram2(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[2]),
+        .dout({r_valids[2], r_dirtys[2], r_tags[2]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram3(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[3]),
+        .dout({r_valids[3], r_dirtys[3], r_tags[3]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram4(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[4]),
+        .dout({r_valids[4], r_dirtys[4], r_tags[4]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram5(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[5]),
+        .dout({r_valids[5], r_dirtys[5], r_tags[5]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram6(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[6]),
+        .dout({r_valids[6], r_dirtys[6], r_tags[6]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram7(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[7]),
+        .dout({r_valids[7], r_dirtys[7], r_tags[7]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram8(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[8]),
+        .dout({r_valids[8], r_dirtys[8], r_tags[8]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram9(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[9]),
+        .dout({r_valids[9], r_dirtys[9], r_tags[9]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram10(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[10]),
+        .dout({r_valids[10], r_dirtys[10], r_tags[10]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram11(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[11]),
+        .dout({r_valids[11], r_dirtys[11], r_tags[11]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram12(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[12]),
+        .dout({r_valids[12], r_dirtys[12], r_tags[12]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram13(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[13]),
+        .dout({r_valids[13], r_dirtys[13], r_tags[13]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram14(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[14]),
+        .dout({r_valids[14], r_dirtys[14], r_tags[14]})
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
+    ) tag_bram15(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din({w_valid, w_dirty, tag}),
+        .we(tag_wes[15]),
+        .dout({r_valids[15], r_dirtys[15], r_tags[15]})
+    );
+
+    // Data Bram
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram0(
+        .clk(clk),
+        .raddr(r_index),  // which set
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[0]),
+        .dout(r_lines[0])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram1(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[1]),
+        .dout(r_lines[1])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram2(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[2]),
+        .dout(r_lines[2])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram3(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[3]),
+        .dout(r_lines[3])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram4(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[4]),
+        .dout(r_lines[4])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram5(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[5]),
+        .dout(r_lines[5])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram6(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[6]),
+        .dout(r_lines[6])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram7(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[7]),
+        .dout(r_lines[7])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram8(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[8]),
+        .dout(r_lines[8])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram9(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[9]),
+        .dout(r_lines[9])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram10(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[10]),
+        .dout(r_lines[10])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram11(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[11]),
+        .dout(r_lines[11])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram12(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[12]),
+        .dout(r_lines[12])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram13(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[13]),
+        .dout(r_lines[13])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram14(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[14]),
+        .dout(r_lines[14])
+    );
+
+    bram #(
+        .ADDR_WIDTH(INDEX_WIDTH),
+        .DATA_WIDTH(LINE_WIDTH)
+    ) data_bram15(
+        .clk(clk),
+        .raddr(r_index),
+        .waddr(w_index),
+        .din(w_line),
+        .we(data_wes[15]),
+        .dout(r_lines[15])
+    );
+
+    always @(*) begin
+        hit = 1;
+        r_line = 0;
+        if (r_valids[0] && (r_tags[0] == tag))
+            r_line = r_lines[0];
+        else if (r_valids[1] && (r_tags[1] == tag))
+            r_line = r_lines[1];
+        else if (r_valids[2] && (r_tags[2] == tag))
+            r_line = r_lines[2];
+        else if (r_valids[3] && (r_tags[3] == tag))
+            r_line = r_lines[3];
+        else if (r_valids[4] && (r_tags[4] == tag))
+            r_line = r_lines[4];
+        else if (r_valids[5] && (r_tags[5] == tag))
+            r_line = r_lines[5];
+        else if (r_valids[6] && (r_tags[6] == tag))
+            r_line = r_lines[6];
+        else if (r_valids[7] && (r_tags[7] == tag))
+            r_line = r_lines[7];
+        else if (r_valids[8] && (r_tags[8] == tag))
+            r_line = r_lines[8];
+        else if (r_valids[9] && (r_tags[9] == tag))
+            r_line = r_lines[9];
+        else if (r_valids[10] && (r_tags[10] == tag))
+            r_line = r_lines[10];
+        else if (r_valids[11] && (r_tags[11] == tag))
+            r_line = r_lines[11];
+        else if (r_valids[12] && (r_tags[12] == tag))
+            r_line = r_lines[12];
+        else if (r_valids[13] && (r_tags[13] == tag))
+            r_line = r_lines[13];
+        else if (r_valids[14] && (r_tags[14] == tag))
+            r_line = r_lines[14];
+        else if (r_valids[15] && (r_tags[15] == tag))
+            r_line = r_lines[15];
+        else
+            hit = 0;
+    end
+

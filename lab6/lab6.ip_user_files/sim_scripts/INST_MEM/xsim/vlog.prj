@@ -1,0 +1,7 @@
+verilog xil_defaultlib  \
+"../../../../lab6.gen/sources_1/ip/INST_MEM/sim/INST_MEM.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

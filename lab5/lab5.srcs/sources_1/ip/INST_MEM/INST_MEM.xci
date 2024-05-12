@@ -23,7 +23,7 @@
         "common_output_ce": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "dual_port_output_clock_enable": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "simple_dual_port_output_clock_enable": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "coefficient_file": [ { "value": "../test1.coe", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "coefficient_file": [ { "value": "../question.coe", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "default_data_radix": [ { "value": "16", "resolve_type": "user", "usage": "all" } ],
         "default_data": [ { "value": "0", "resolve_type": "user", "usage": "all" } ],
         "reset_qspo": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],

@@ -1,0 +1,12 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_lru.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module TwoWayCacheLRU
+WARNING: [VRFC 10-3380] identifier 'ages' is used before its declaration [/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_lru.v:142]
+WARNING: [VRFC 10-3380] identifier 'ages' is used before its declaration [/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_lru.v:153]
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/bram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bram
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/mem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/mem_bram.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mem_bram
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/cache_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cache_tb
