@@ -3,7 +3,7 @@
 # 生成的cache_tb.v文件主要是模拟CPU对cache的读写操作，用于验证cache的正确性
 
 # 定义一些仿真文件参数
-MODE = 1 # 0:随机读写 1：模拟CPU伪顺序读写（会有不定期跳转，概率为BranchP）
+MODE = 0 # 0:随机读写 1：模拟CPU伪顺序读写（会有不定期跳转，概率为BranchP）
 BranchP = 0.1 # 跳转概率，仅在MODE=1时有效，当BranchP = 0时，为顺序读写不会跳转
 READ_NUM   = 2000 # 读取次数
 WRITE_NUM  = 1000 # 写入次数
@@ -17,12 +17,13 @@ INDEX_WIDTH = 3
 LINE_OFFSET_WIDTH = 2
 SPACE_OFFSET = 2
 MEM_ADDR_WIDTH = 10
-WAY_NUM = 2
+WAY_NUM = 4
 
 # cache 类型
-CACHE_MODULE_NAME = "TwoWayCacheLRU"
+# CACHE_MODULE_NAME = "TwoWayCacheLRU"
 # CACHE_MODULE_NAME = "TwoWayCacheFIFO"
 # CACHE_MODULE_NAME = "TwoWayCacheRandom"
+CACHE_MODULE_NAME = "NWayCache"
 
 # 生成mem_bram.v文件
 from random import randint

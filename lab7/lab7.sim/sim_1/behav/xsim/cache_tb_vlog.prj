@@ -1,9 +1,9 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../lab7.srcs/sources_1/new/src/2way_cache_lru.v" \
 "../../../../lab7.srcs/sources_1/new/src/bram.v" \
 "../../../../lab7.srcs/sources_1/new/src/mem.v" \
 "../../../../lab7.srcs/sources_1/new/src/mem_bram.v" \
+"../../../../lab7.srcs/sources_1/new/src/nway_cache.v" \
 "../../../../lab7.srcs/sources_1/new/src/cache_tb.v" \
 
 # compile glbl module

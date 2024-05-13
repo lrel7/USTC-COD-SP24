@@ -111,7 +111,6 @@ module TwoWayCacheLRU #(
                 addr_buf <= addr;
                 w_data_buf <= w_data;
                 op_buf <= w_req;
-
             end
             if (ret_buf_we) begin
                 ret_buf <= mem_r_data;

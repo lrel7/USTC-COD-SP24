@@ -17,12 +17,13 @@ INDEX_WIDTH = 3
 LINE_OFFSET_WIDTH = 2
 SPACE_OFFSET = 2
 MEM_ADDR_WIDTH = 10
-WAY_NUM = 2
+WAY_NUM = 4
 
 # cache 类型
 # CACHE_MODULE_NAME = "TwoWayCacheLRU"
 # CACHE_MODULE_NAME = "TwoWayCacheFIFO"
-CACHE_MODULE_NAME = "TwoWayCacheRandom"
+# CACHE_MODULE_NAME = "TwoWayCacheRandom"
+CACHE_MODULE_NAME = "NWayCache"
 
 # 生成mem_bram.v文件
 from random import randint

@@ -4,7 +4,7 @@
 - 块大小：4字（16字节 128位）
 - 采用写回写分配策略
 */
-module MyCache #(
+module NWayCache #(
     parameter INDEX_WIDTH       = 3,    // Cache索引位宽 2^3=8行
     parameter LINE_OFFSET_WIDTH = 2,    // 行偏移位宽，决定了一行的宽度 2^2=4字
     parameter SPACE_OFFSET      = 2,    // 一个地址空间占1个字节，因此一个字需要4个地址空间，由于假设为整字读取，处理地址的时候可以默认后两位为0
@@ -54,32 +54,43 @@ module MyCache #(
     wire [LINE_WIDTH-1:0]  w_line_mask;  // Data Bram写数据掩码
     wire [LINE_WIDTH-1:0]  w_data_line;  // 输入写数据移位后的数据
     wire [TAG_WIDTH-1:0]   tag;      // CPU请求地址中分离的标记 用于比较 也可用于写入
-    wire [TAG_WIDTH-1:0]   r_tag;    // Tag Bram读数据 用于比较
     wire [LINE_OFFSET_WIDTH-1:0] word_offset;  // 字偏移
     reg  [31:0]            cache_data;  // Cache数据
     reg  [31:0]            mem_data;    // 内存数据
     wire [31:0]            dirty_mem_addr; // 通过读出的tag和对应的index，偏移等得到脏块对应的内存地址并写回到正确的位置
-    wire valid;  // Cache有效位
-    wire dirty;  // Cache脏位.
     reg  w_valid;  // Cache写有效位
     reg  w_dirty;  // Cache写脏位
-    reg  hit;    // Cache命中
+    wire  hit;    // Cache命中
 
-    /* My */
-    wire [TAG_WIDTH - 1 : 0] r_tags [0 : 15];
-    wire [15 : 0] r_valids;
-    wire [15 : 0] r_dirtys;
-    reg [TAG_WIDTH - 1 : 0] r_tags_buf [0 : 15];
-    reg [15 : 0] r_valids_buf;
-    reg [15 : 0] tag_wes;
-    wire [LINE_WIDTH - 1 : 0] r_lines [0 : 15];
-    reg [15 : 0] data_wes;
+    /* Bram read signals */
+    wire [TAG_WIDTH - 1 : 0] r_tags [0 : WAY_NUM - 1];
+    wire [WAY_NUM - 1 : 0] r_valids, r_dirtys;
+    wire [LINE_WIDTH - 1 : 0] r_lines [0 : WAY_NUM - 1];
+
+    /* Write cache signals */
+    reg [WAY_NUM - 1 : 0] cache_wes;  // 0: do nothing, bit i == 1: write way i to cache
+    reg [WAY_NUM - 1 : 0] cache_wes_buf;
+
+    reg [WAY_NUM - 1 : 0] way_hits;
+
+    /* Write back to mem signals */
+    wire [WAY_NUM - 1 : 0] write_back;  // 0: do nothing, bit i == 1: write back way i
+    reg [LINE_WIDTH - 1 : 0] write_back_line;
+    reg [TAG_WIDTH - 1 : 0] write_back_tag;
+
+    /* LRU signals*/
+    wire [WAY_NUM - 1 : 0] refs;  // bit i = 1: ref way i recently
+    reg [3 : 0] ref_way_index;  // ref which way recently
+    reg [WAY_NUM - 1 : 1] ages [0 : SET_NUM - 1];
+    reg [WAY_NUM - 1 : 0] evicts;  // 0: do nothing, bit i == 1: evict way i
+
+    /* Loop vars */
+    genvar i;
+    integer j;
 
     // Cache相关控制信号
     reg addr_buf_we;  // 请求地址缓存写使能
     reg ret_buf_we;   // 返回数据缓存写使能
-    reg data_we;      // Cache写使能
-    reg tag_we;       // Cache标记写使能
     reg data_from_mem;  // 从内存读取数据 (whether the read data should be directly from memory or from cache)
     reg refill;       // 标记需要重新填充，在MISS状态下接受到内存数据后置1,在IDLE状态下进行填充后置0
 
@@ -103,7 +114,6 @@ module MyCache #(
     end
 
     // 中间寄存器保留初始的请求地址和写数据，可以理解为addr_buf中的地址为当前Cache正在处理的请求地址，而addr中的地址为新的请求地址
-    integer p;
     always @(posedge clk or negedge rstn) begin
         if (!rstn) begin
             addr_buf <= 0;
@@ -116,10 +126,6 @@ module MyCache #(
                 addr_buf <= addr;
                 w_data_buf <= w_data;
                 op_buf <= w_req;
-                r_valids_buf <= r_valids;
-                for (p = 0; p < WAY_NUM; p = p + 1) begin
-                    r_tags_buf[p] <= r_tags[p];
-                end
             end
             if (ret_buf_we) begin
                 ret_buf <= mem_r_data;
@@ -133,14 +139,35 @@ module MyCache #(
         end
     end
 
+    /* `cache_wes` 的缓存处理 */
+    always @(posedge clk or negedge rstn) begin
+        if (~rstn) begin
+            cache_wes_buf <= 0;
+        end else if (CS == READ || CS == WRITE) begin
+            cache_wes_buf <= (&r_valids) ? evicts : (~r_valids & (-(~r_valids)));
+        end
+    end
+
     // 对输入地址进行解码
     assign r_index = addr[INDEX_WIDTH + LINE_OFFSET_WIDTH + SPACE_OFFSET - 1 : LINE_OFFSET_WIDTH + SPACE_OFFSET];
     assign w_index = addr_buf[INDEX_WIDTH + LINE_OFFSET_WIDTH + SPACE_OFFSET - 1 : LINE_OFFSET_WIDTH + SPACE_OFFSET];
     assign tag = addr_buf[31 : INDEX_WIDTH + LINE_OFFSET_WIDTH + SPACE_OFFSET];
     assign word_offset = addr_buf[LINE_OFFSET_WIDTH + SPACE_OFFSET - 1 : SPACE_OFFSET];
 
+    /* Write back to mem */
+    assign write_back = r_valids & r_dirtys & evicts;
+    always @(*) begin
+        write_back_line = 0; write_back_tag = 0;
+        for (j = 0; j < WAY_NUM; j = j + 1) begin
+            if (write_back[j]) begin
+                write_back_line = r_lines[j];
+                write_back_tag = r_tags[j];
+            end
+        end
+    end
+
     // 脏块地址计算
-    assign dirty_mem_addr = {r_tag, w_index} << (LINE_OFFSET_WIDTH + SPACE_OFFSET);
+    assign dirty_mem_addr = {write_back_tag, w_index} << (LINE_OFFSET_WIDTH + SPACE_OFFSET);
 
     // 写回地址、数据寄存器
     reg [31:0] dirty_mem_addr_buf;
@@ -152,15 +179,14 @@ module MyCache #(
         end else begin
             if (CS == READ || CS == WRITE) begin
                 dirty_mem_addr_buf <= dirty_mem_addr;
-                dirty_mem_data_buf <= r_line;
+                dirty_mem_data_buf <= write_back_line;
             end
         end
     end
 
-    genvar i;
+    /* Tag bram and Data bram */
     generate
         for (i = 0; i < WAY_NUM; i = i + 1) begin: bram_inst
-            /* Tag bram */
             bram #(
                 .ADDR_WIDTH(INDEX_WIDTH),
                 .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
@@ -169,11 +195,10 @@ module MyCache #(
                 .raddr(r_index),
                 .waddr(w_index),
                 .din({w_valid, w_dirty, tag}),
-                .we(tag_wes[i]),
+                .we(cache_wes[i]),
                 .dout({r_valids[i], r_dirtys[i], r_tags[i]})
             );
 
-            /* Data bram */
             bram #(
                 .ADDR_WIDTH(INDEX_WIDTH),
                 .DATA_WIDTH(LINE_WIDTH)
@@ -182,78 +207,24 @@ module MyCache #(
                 .raddr(r_index),  // which set
                 .waddr(w_index),
                 .din(w_line),
-                .we(data_wes[i]),
+                .we(cache_wes[i]),
                 .dout(r_lines[i])
             );
         end        
     endgenerate
- 
-    integer j, hit_index;
+
+    // Deal with hit
     always @(*) begin
-        hit = 0;
-        r_line = 0;
-        hit_index = 16;
+        way_hits = 0; r_line = 0;
         for (j = 0; j < WAY_NUM; j = j + 1) begin
-            if (r_valids_buf[j] && (r_tags_buf[j] == tag)) begin
-                hit = 1;
+            if (r_valids[j] && (r_tags[j] == tag)) begin
+                way_hits[j] = 1;
                 r_line = r_lines[j];
-                hit_index = j;
             end
         end
     end
-
-    /* Pseudo LRU */
-    reg [WAY_NUM - 1 : 1] ages_buf[0 : SET_NUM - 1];
-    reg [WAY_NUM - 1 : 1] ages;
-    integer k, l, m;
-    integer e_line_index;
-    integer idxs[0 : 4];
-    integer e_idxs[0 : 4];
-    integer targets[0 : 4];
-    /* Prepare ages */
-    always @(*) begin
-        idxs[0] = 0;
-        targets[0] = WAY_NUM >> 1;
-        ages = ages_buf[w_index];
-        for (k = 0; k < WAY_DEPTH; k = k + 1) begin
-            if (hit_index < targets[k]) begin
-                ages[idxs[k]] = 1;
-                idxs[k + 1] = idxs[k] << 1;  // go left
-                targets[k + 1] = targets[k] - (targets[k] >> 1);
-            end else begin
-                ages[idxs[k]] = 0;
-                idxs[k + 1] = idxs[j] << 1 + 1;  // go right
-                targets[k + 1] = targets[k] + (targets[k] >> 1);
-            end
-        end
-    end
-    /* Get evicted line */
-    always @(*) begin
-        e_idxs[0] = 0;
-        for (l = 0; l < WAY_DEPTH - 1; l = l + 1) begin
-            if (ages_buf[w_index][e_idxs[l]] == 0) begin
-                e_idxs[l + 1] = e_idxs[l] << 1;  // go left
-            end else begin
-                e_idxs[l + 1] = e_idxs[l] << 1 + 1;  // go right
-            end
-        end
-        e_line_index = e_idxs[l] - (WAY_NUM >> 1) + ages_buf[w_index][e_idxs[l]];
-    end
-
-    /* LRU ages update */
-    generate
-        for (i = 0; i < SET_NUM; i = i + 1) begin
-            always @(posedge clk or negedge rstn) begin
-                if (!rstn) begin
-                    ages_buf[i] <= 0;
-                end else if (hit) begin
-                    if (i == w_index) begin
-                        ages_buf[i] <= ages;
-                    end
-                end
-            end
-        end
-    endgenerate
+    assign hit = |way_hits;
+ 
 
     // 选择输出数据 从Cache或者从内存 这里的选择与行大小有关，因此如果你调整了行偏移位宽，这里也需要调整
     always @(*) begin
@@ -283,14 +254,83 @@ module MyCache #(
 
     assign r_data = data_from_mem ? mem_data : hit ? cache_data : 0;
 
-
-
     // 写入Cache 这里要判断是命中后写入还是未命中后写入
     assign w_line_mask = 32'hFFFFFFFF << (word_offset * 32);   // 写入数据掩码
     assign w_data_line = w_data_buf << (word_offset * 32);     // 写入数据移位
     assign w_line = (CS == IDLE && op_buf) ? ret_buf & ~w_line_mask | w_data_line : // 写入未命中，需要将内存数据与写入数据合并
                     (CS == IDLE) ? ret_buf : // 读取未命中
                     r_line & ~w_line_mask | w_data_line; // 写入命中,需要对读取的数据与写入的数据进行合并
+
+    /* Pseudo LRU */
+    /* Which way is accessed most recently? */
+    assign refs = hit ? way_hits : cache_wes;
+    always @(*) begin
+        ref_way_index = 0;
+        for (j = 0; j < WAY_NUM - 1; j = j + 1) begin
+            if (refs[j]) begin
+                ref_way_index = j;
+            end
+        end
+    end
+
+    /* Prepare `ages_update` */
+    reg [WAY_NUM - 1 : 1] ages_update;
+    reg [3 : 0] node_idxs[0 : 4];  // index of current node at depth d
+    reg [3 : 0] node_vals[0 : 4];  // val of current node at depth d
+
+    always @(*) begin
+        ages_update = ages[w_index];
+        node_idxs[0] = 0;  // root node: index = 0
+        node_vals[0] = WAY_NUM >> 1;  // root node: val = N / 2
+
+        for (j = 0; j < WAY_DEPTH; j = j + 1) begin
+            if (ref_way_index < node_vals[j]) begin  // go left
+                ages_update[node_idxs[j]] = 1;  // right unused
+                node_idxs[j + 1] = node_idxs[j] << 1; 
+                node_vals[j + 1] = node_vals[j] - (node_vals[j] >> 1);
+            end else begin  // go right
+                ages_update[node_idxs[j]] = 0;  // left unused
+                node_idxs[j + 1] = node_idxs[j] << 1 + 1;
+                node_vals[j + 1] = node_vals[j] + (node_vals[j] >> 1);
+            end
+        end
+    end
+
+    /* Update ages */
+    generate
+        for (i = 0; i < SET_NUM; i = i + 1) begin
+            always @(posedge clk or negedge rstn) begin
+                if (~rstn) begin
+                    ages[i] <= 0;
+                end else if (i == w_index) begin
+                    if (hit | refill) begin
+                        ages[i] <= ages_update;
+                    end
+                end
+            end
+        end
+    endgenerate
+
+    /* Calculate `evicts` */
+    reg [3 : 0] e_node_idxs[0 : 4];
+    reg [3 : 0] e_node_vals[0 : 4];
+    always @(*) begin
+        evicts = 0;
+        e_node_idxs[0] = 0;  // root node: index = 0
+        e_node_vals[0] = WAY_NUM >> 1;  // root node: val = N / 2
+
+        for (j = 0; j < WAY_DEPTH; j = j + 1) begin
+            if (ages[w_index][e_node_idxs[j]]) begin  // right unused, go right
+                e_node_idxs[j + 1] = e_node_idxs[j] << 1 + 1;
+                e_node_vals[j + 1] = e_node_vals[j] + (e_node_vals[j] >> 1);
+            end else begin  // left unused, go left
+                e_node_idxs[j + 1] = e_node_idxs[j] << 1;
+                e_node_vals[j + 1] = e_node_vals[j] - (e_node_vals[j] >> 1);
+            end
+        end
+
+        evicts[e_node_vals[WAY_DEPTH]] = 1;
+    end
 
     // 状态机更新逻辑
     always @(*) begin
@@ -305,9 +345,9 @@ module MyCache #(
                 end
             end
             READ: begin
-                if (miss && !dirty) begin  // no need to write back before evicting
+                if (miss && !write_back) begin  // no need to write back before evicting
                     NS = MISS;
-                end else if (miss && dirty) begin  // need to write back first before evicting
+                end else if (miss && write_back) begin  // need to write back first before evicting
                     NS = W_DIRTY;
                 end else if (r_req) begin  // hit, and receive a r_req
                     NS = READ;
@@ -325,9 +365,9 @@ module MyCache #(
                 end
             end
             WRITE: begin
-                if (miss && !dirty) begin  // no need to write back before evicting
+                if (miss && !write_back) begin  // no need to write back before evicting
                     NS = MISS;
-                end else if (miss && dirty) begin  // need to write back first before evicting
+                end else if (miss && write_back) begin  // need to write back first before evicting
                     NS = W_DIRTY;
                 end else if (r_req) begin  // hit, and receive a r_req
                     NS = READ;
@@ -354,8 +394,6 @@ module MyCache #(
     always @(*) begin
         addr_buf_we   = 1'b0;
         ret_buf_we    = 1'b0;
-        data_we       = 1'b0;
-        tag_we        = 1'b0;
         w_valid       = 1'b0;
         w_dirty       = 1'b0;
         data_from_mem = 1'b0;
@@ -365,8 +403,7 @@ module MyCache #(
         mem_addr      = 32'b0;
         mem_w_data    = 0;
 
-        tag_wes = 0;
-        data_wes = 0;
+        cache_wes = 0;
 
         case(CS)
             IDLE: begin
@@ -377,22 +414,11 @@ module MyCache #(
                     data_from_mem = 1'b1;  // read from memory
                     w_valid = 1'b1;
                     w_dirty = 1'b0;
-                    // data_we = 1'b1;
-                    // tag_we = 1'b1;
+                    cache_wes = cache_wes_buf;
+
                     if (op_buf) begin // 写
                         w_dirty = 1'b1;
                     end 
-
-                    /* Find idle line */
-                    if (~r_valids_buf != 0) begin
-                        data_wes = r_valids_buf & (-r_valids_buf);
-                        tag_wes = data_wes;
-                    end
-                    /* No idle line, evict */
-                    else begin
-                        data_wes = (1 << e_line_index);
-                        tag_wes = data_wes;
-                    end
                 end
             end
             READ: begin
@@ -403,11 +429,6 @@ module MyCache #(
                 end else begin // 未命中
                     miss = 1'b1;
                     addr_buf_we = 1'b0;  // do not receive next req
-                    if (dirty) begin // consider if the current line if dirty before evicting it
-                        mem_w = 1'b1;
-                        mem_addr = dirty_mem_addr;
-                        mem_w_data = r_line; // write back the current line
-                    end
                 end
             end
             MISS: begin
@@ -426,18 +447,11 @@ module MyCache #(
                     addr_buf_we = 1'b1; // ok to receive next req
                     w_valid = 1'b1;
                     w_dirty = 1'b1;
-                    // data_we = 1'b1;
-                    // tag_we = 1'b1;
-                    data_wes = (1 << hit_index);
-                    tag_wes = data_wes;
+                    cache_wes = way_hits;
+
                 end else begin // 未命中
                     miss = 1'b1;
                     addr_buf_we = 1'b0;  // do not receive next req
-                    if (dirty) begin // 脏数据需要写回
-                        mem_w = 1'b1;
-                        mem_addr = dirty_mem_addr;
-                        mem_w_data = r_line; // 写回数据
-                    end
                 end
             end
             W_DIRTY: begin
