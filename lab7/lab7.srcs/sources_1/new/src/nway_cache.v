@@ -35,9 +35,9 @@ module NWayCache #(
         // 标记位宽度
         TAG_WIDTH = 32 - INDEX_WIDTH - LINE_OFFSET_WIDTH - SPACE_OFFSET,
         // Cache行数
-        SET_NUM   = 1 << INDEX_WIDTH;
-    
-    wire WAY_DEPTH = WAY_NUM == 2 ? 1 : WAY_NUM == 4 ? 2 :
+        SET_NUM   = 1 << INDEX_WIDTH,
+
+        WAY_DEPTH = WAY_NUM == 2 ? 1 : WAY_NUM == 4 ? 2 :
                         WAY_NUM == 8 ? 3 : WAY_NUM == 16 ? 4 : 0;
     
     // Cache相关寄存器
@@ -80,13 +80,13 @@ module NWayCache #(
 
     /* LRU signals*/
     wire [WAY_NUM - 1 : 0] refs;  // bit i = 1: ref way i recently
-    reg [3 : 0] ref_way_index;  // ref which way recently
+    reg [WAY_DEPTH - 1 : 0] ref_way_index;  // ref which way recently
     reg [WAY_NUM - 1 : 1] ages [0 : SET_NUM - 1];
     reg [WAY_NUM - 1 : 0] evicts;  // 0: do nothing, bit i == 1: evict way i
 
     /* Loop vars */
-    genvar i;
-    integer j;
+    // genvar i1, i2;
+    // integer j;
 
     // Cache相关控制信号
     reg addr_buf_we;  // 请求地址缓存写使能
@@ -158,7 +158,7 @@ module NWayCache #(
     assign write_back = r_valids & r_dirtys & evicts;
     always @(*) begin
         write_back_line = 0; write_back_tag = 0;
-        for (j = 0; j < WAY_NUM; j = j + 1) begin
+        for (integer j = 0; j < WAY_NUM; j = j + 1) begin
             if (write_back[j]) begin
                 write_back_line = r_lines[j];
                 write_back_tag = r_tags[j];
@@ -186,7 +186,7 @@ module NWayCache #(
 
     /* Tag bram and Data bram */
     generate
-        for (i = 0; i < WAY_NUM; i = i + 1) begin: bram_inst
+        for (genvar i = 0; i < WAY_NUM; i = i + 1) begin: bram_inst
             bram #(
                 .ADDR_WIDTH(INDEX_WIDTH),
                 .DATA_WIDTH(TAG_WIDTH + 2) // 最高位为有效位，次高位为脏位，低位为标记位
@@ -216,7 +216,7 @@ module NWayCache #(
     // Deal with hit
     always @(*) begin
         way_hits = 0; r_line = 0;
-        for (j = 0; j < WAY_NUM; j = j + 1) begin
+        for (integer j = 0; j < WAY_NUM; j = j + 1) begin
             if (r_valids[j] && (r_tags[j] == tag)) begin
                 way_hits[j] = 1;
                 r_line = r_lines[j];
@@ -266,39 +266,65 @@ module NWayCache #(
     assign refs = hit ? way_hits : cache_wes;
     always @(*) begin
         ref_way_index = 0;
-        for (j = 0; j < WAY_NUM - 1; j = j + 1) begin
+        for (integer j = 0; j < WAY_NUM; j = j + 1) begin
             if (refs[j]) begin
                 ref_way_index = j;
             end
         end
     end
 
+    /* Init BST */
+    reg [WAY_DEPTH - 1 : 0] bst[1 : WAY_NUM - 1];
+    initial begin
+        case (WAY_NUM)
+            2: begin
+                bst[1] = 1;
+            end 
+            4: begin
+                bst[1] = 2; 
+                bst[2] = 1; bst[3] = 3;
+            end
+            8: begin
+                bst[1] = 4;
+                bst[2] = 2; bst[3] = 6;
+                bst[4] = 1; bst[5] = 3; bst[6] = 5; bst[7] = 7;
+            end
+            16: begin
+                bst[1] = 8;
+                bst[2] = 4; bst[3] = 12;
+                bst[4] = 2; bst[5] = 6; bst[6] = 10; bst[7] = 14;
+                bst[8] = 1; bst[9] = 3; bst[10] = 5; bst[11] = 7; bst[12] = 9; bst[13] = 11; bst[14] = 13; bst[15] = 15;
+            end
+            default: ;
+        endcase
+    end
+
     /* Prepare `ages_update` */
     reg [WAY_NUM - 1 : 1] ages_update;
-    reg [3 : 0] node_idxs[0 : 4];  // index of current node at depth d
-    reg [3 : 0] node_vals[0 : 4];  // val of current node at depth d
+    reg [WAY_DEPTH - 1 : 0] node_idxs[1 : WAY_DEPTH];  // index of current node at depth d
 
     always @(*) begin
         ages_update = ages[w_index];
-        node_idxs[0] = 0;  // root node: index = 0
-        node_vals[0] = WAY_NUM >> 1;  // root node: val = N / 2
+        node_idxs[1] = 1;  // root node: index = 1
 
-        for (j = 0; j < WAY_DEPTH; j = j + 1) begin
-            if (ref_way_index < node_vals[j]) begin  // go left
+        for (integer j = 1; j <= WAY_DEPTH; j = j + 1) begin
+            if (ref_way_index < bst[node_idxs[j]]) begin  // go left
                 ages_update[node_idxs[j]] = 1;  // right unused
-                node_idxs[j + 1] = node_idxs[j] << 1; 
-                node_vals[j + 1] = node_vals[j] - (node_vals[j] >> 1);
+                if (j < WAY_DEPTH) begin
+                    node_idxs[j + 1] = node_idxs[j] << 1; 
+                end
             end else begin  // go right
                 ages_update[node_idxs[j]] = 0;  // left unused
-                node_idxs[j + 1] = node_idxs[j] << 1 + 1;
-                node_vals[j + 1] = node_vals[j] + (node_vals[j] >> 1);
+                if (j < WAY_DEPTH) begin
+                    node_idxs[j + 1] = (node_idxs[j] << 1) + 1;
+                end
             end
         end
     end
 
     /* Update ages */
     generate
-        for (i = 0; i < SET_NUM; i = i + 1) begin
+        for (genvar i = 0; i < SET_NUM; i = i + 1) begin
             always @(posedge clk or negedge rstn) begin
                 if (~rstn) begin
                     ages[i] <= 0;
@@ -312,24 +338,24 @@ module NWayCache #(
     endgenerate
 
     /* Calculate `evicts` */
-    reg [3 : 0] e_node_idxs[0 : 4];
-    reg [3 : 0] e_node_vals[0 : 4];
+    reg [WAY_DEPTH - 1 : 0] e_node_idxs[1 : WAY_DEPTH];
     always @(*) begin
         evicts = 0;
-        e_node_idxs[0] = 0;  // root node: index = 0
-        e_node_vals[0] = WAY_NUM >> 1;  // root node: val = N / 2
+        e_node_idxs[1] = 1;  // root node: index = 1
 
-        for (j = 0; j < WAY_DEPTH; j = j + 1) begin
+        for (integer j = 1; j < WAY_DEPTH; j = j + 1) begin
             if (ages[w_index][e_node_idxs[j]]) begin  // right unused, go right
-                e_node_idxs[j + 1] = e_node_idxs[j] << 1 + 1;
-                e_node_vals[j + 1] = e_node_vals[j] + (e_node_vals[j] >> 1);
+                e_node_idxs[j + 1] = (e_node_idxs[j] << 1) + 1;
             end else begin  // left unused, go left
                 e_node_idxs[j + 1] = e_node_idxs[j] << 1;
-                e_node_vals[j + 1] = e_node_vals[j] - (e_node_vals[j] >> 1);
             end
         end
 
-        evicts[e_node_vals[WAY_DEPTH]] = 1;
+        if (ages[w_index][e_node_idxs[WAY_DEPTH]]) begin  // right unused
+            evicts[bst[e_node_idxs[WAY_DEPTH]]] = 1;
+        end else begin  // left unused
+            evicts[bst[e_node_idxs[WAY_DEPTH]] - 1] = 1;
+        end
     end
 
     // 状态机更新逻辑

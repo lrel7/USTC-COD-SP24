@@ -11,9 +11,9 @@ Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.bram(DATA_WIDTH=27)
 Compiling module xil_defaultlib.bram
-Compiling module xil_defaultlib.NWayCache(WAY_NUM=4)
-Compiling module xil_defaultlib.mem_bram(ADDR_WIDTH=8)
-Compiling module xil_defaultlib.mem(MEM_ADDR_WIDTH=8,WAY_NUM=4)
+Compiling module xil_defaultlib.NWayCache(WAY_NUM=16)
+Compiling module xil_defaultlib.mem_bram
+Compiling module xil_defaultlib.mem(WAY_NUM=16)
 Compiling module xil_defaultlib.cache_tb
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot cache_tb_behav
