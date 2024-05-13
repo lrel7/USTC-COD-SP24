@@ -20,7 +20,9 @@ MEM_ADDR_WIDTH = 10
 WAY_NUM = 4
 
 # cache 类型
-CACHE_MODULE_NAME = "TwoWayCacheLRU"
+# CACHE_MODULE_NAME = "TwoWayCacheLRU"
+# CACHE_MODULE_NAME = "TwoWayCacheFIFO"
+CACHE_MODULE_NAME = "TwoWayCacheRandom"
 
 # 生成mem_bram.v文件
 from random import randint

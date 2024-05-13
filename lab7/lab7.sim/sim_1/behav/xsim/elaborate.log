@@ -7,13 +7,13 @@ Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
 Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_lru.v" Line 7. Module TwoWayCacheLRU(WAY_NUM=4) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_lru.v" Line 7. Module TwoWayCacheLRU(WAY_NUM=4) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_random.v" Line 7. Module TwoWayCacheRandom(WAY_NUM=4) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/ubuntu/cod_labs/lab7/lab7.srcs/sources_1/new/src/2way_cache_random.v" Line 7. Module TwoWayCacheRandom(WAY_NUM=4) doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.bram(DATA_WIDTH=27)
 Compiling module xil_defaultlib.bram
-Compiling module xil_defaultlib.TwoWayCacheLRU(WAY_NUM=4)
+Compiling module xil_defaultlib.TwoWayCacheRandom(WAY_NUM=4)
 Compiling module xil_defaultlib.mem_bram(ADDR_WIDTH=8)
 Compiling module xil_defaultlib.mem(MEM_ADDR_WIDTH=8,WAY_NUM=4)
 Compiling module xil_defaultlib.cache_tb
