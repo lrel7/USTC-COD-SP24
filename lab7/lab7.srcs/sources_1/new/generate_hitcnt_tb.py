@@ -20,9 +20,9 @@ MEM_ADDR_WIDTH = 10
 WAY_NUM = 2
 
 # cache 类型
-CACHE_MODULE_NAME = "TwoWayCacheLRU"
+# CACHE_MODULE_NAME = "TwoWayCacheLRU"
 # CACHE_MODULE_NAME = "TwoWayCacheFIFO"
-# CACHE_MODULE_NAME = "TwoWayCacheRandom"
+CACHE_MODULE_NAME = "TwoWayCacheRandom"
 
 # 生成mem_bram.v文件
 from random import randint
@@ -120,6 +120,10 @@ cache_tb_body = '''
     wire[31:0] data;
     assign op = test_data[test_cnt-1][32];
     assign data = test_data[test_cnt-1][31:0];
+
+    // 统计命中率
+    reg hit = 1;
+    reg [31 : 0] hit_cnt = 0;
     
     // 状态机
     assign addr = test_addr[test_cnt]<<SPACE_OFFSET;
@@ -134,8 +138,20 @@ cache_tb_body = '''
                     diff = 1;
                 end
             end
+            if (hit) begin
+                hit_cnt <= hit_cnt + 1;
+            end
             test_cnt <= test_cnt + 1;
+            hit <= 1;
+        end else begin
+            hit <= 0;
         end
+    end
+
+    initial begin
+        #20000;
+        $display("Hit rate: %f", $itor(hit_cnt) / test_cnt);
+        $finish;
     end
 
     // 例化cache
